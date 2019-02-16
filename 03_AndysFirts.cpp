@@ -1,8 +1,8 @@
 #include <bits/stdc++.h>
 
 using namespace std;
-void parse(string& s){
-
+bool check(char c){
+  return c <= 'z' and c >= 'a';
 }
 
 int main(){
@@ -11,9 +11,19 @@ int main(){
   set<string> out;
   string s;
   while(cin >> s){
-    transform(s.begin(), s.end(), s.begin(), ::tolower);
+    string cur = "";
+    for(char a : s){
+      a = tolower(a);
+      if(check(a)){
+        cur += a;
+      }else if(cur != ""){
+        out.insert(cur);
+        cur = "";
+      }
+    }
 
-    out.insert(s);
+    if(cur != "")
+     out.insert(cur);
   }
 
   for(string z : out){
