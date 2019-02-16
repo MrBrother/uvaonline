@@ -7,6 +7,7 @@ int main(){
   int N; cin >> N;
   while(N--){
     multiset<int> L1, L2;
+    vector<int> sA, sB;
     int a,b,c; cin >> a >> b >> c;
 
     while(b--){
@@ -18,39 +19,67 @@ int main(){
         int t; cin >> t;
         L2.insert(t);
     }
-    while(L1.size() != 0 and L2.size() != 0){
-        if(*L1.rbegin() > *L2.rbegin()){
-          int t = *L1.rbegin() - *L2.rbegin();
-          L1.erase(prev(L1.end()));
-          L2.erase(prev(L2.end()));
-          L1.insert(t);
-        }else if(*L1.rbegin() < *L2.rbegin()){
-          int t = *L2.rbegin() - *L1.rbegin();
-          L1.erase(prev(L1.end()));
-          L2.erase(prev(L2.end()));
-          L2.insert(t);
-        }else{
-          L1.erase(prev(L1.end()));
-          L2.erase(prev(L2.end()));
-        }
+    while(L1.size() > 0 and L2.size() > 0){
+      sA.clear(); sB.clear();
+       for(int i = 0; i < a; i++){
+
+          if(*L1.rbegin() > *L2.rbegin()){
+              int t = *L1.rbegin() - *L2.rbegin();
+              L1.erase(prev(L1.end()));
+              L2.erase(prev(L2.end()));
+              sA.push_back(t);
+          }else if(*L1.rbegin() < *L2.rbegin()){
+              int t = *L2.rbegin() - *L1.rbegin();
+              L1.erase(prev(L1.end()));
+              L2.erase(prev(L2.end()));
+              sB.push_back(t);
+          }else{
+            L1.erase(prev(L1.end()));
+            L2.erase(prev(L2.end()));
+          }
+
+        if(L1.size() == 0 || L2.size() == 0)
+          break;
+
+
+      }
+
+      for(int i = 0; i < sA.size(); i++){
+        L1.insert(sA[i]);
+      }
+
+
+      for(int i = 0; i < sB.size(); i++){
+        L2.insert(sB[i]);
+      }
     }
 
     if(L1.size()==L2.size()){
+
       cout << "green and blue died" << endl;
+
     }else if(L1.size()>L2.size()){
       cout << "green wins" << endl;
+
+      auto it = L1.end();
+      do{
+        it--;
+        cout << *it << endl;
+      }while (it != L1.begin());
+
     }else{
       cout << "blue wins" << endl;
+
+      auto it = L2.end();
+      do{
+        it--;
+        cout << *it << endl;
+      }while (it != L2.begin());
+
     }
 
-    for(auto s = L1.begin(); s != L1.end(); s++){
-      cout << *s << endl;
-    }
 
-    for(auto s = L2.begin(); s != L2.end(); s++){
-      cout << *s << endl;
-    }
-    if(N!=0)
+    if(N)
       cout << endl;
   }
   return 0;
