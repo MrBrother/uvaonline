@@ -13,14 +13,13 @@ int main(){
 
   while(N--){
     map<string, int> a;
-    int counter;
+    int counter = 0;
     string z;
     while(getline(cin, z)){
       if(z=="") break;
       a[z]++;
       counter++;
     }
-    cout << counter << endl;
     for(auto it = a.begin(); it != a.end(); it++){
       cout << it->first << " " << it->second*100.0/counter << endl;
     }
