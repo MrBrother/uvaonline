@@ -25,19 +25,14 @@ int main(){
 
           if(*L1.rbegin() > *L2.rbegin()){
               int t = *L1.rbegin() - *L2.rbegin();
-              L1.erase(prev(L1.end()));
-              L2.erase(prev(L2.end()));
               sA.push_back(t);
           }else if(*L1.rbegin() < *L2.rbegin()){
               int t = *L2.rbegin() - *L1.rbegin();
-              L1.erase(prev(L1.end()));
-              L2.erase(prev(L2.end()));
               sB.push_back(t);
-          }else{
-            L1.erase(prev(L1.end()));
-            L2.erase(prev(L2.end()));
           }
 
+        L1.erase(prev(L1.end()));
+        L2.erase(prev(L2.end()));
         if(L1.size() == 0 || L2.size() == 0)
           break;
 
